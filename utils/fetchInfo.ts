@@ -9,7 +9,7 @@ export const fetchInfo = async () => {
     ? "http://localhost:3000"
     : process.env.NEXT_PUBLIC_VERCEL_URL;
 
-  const res = await fetch(`${server}/api/getInfo`);
+  const res = await fetch(`https://${server}/api/getInfo`);
 
   const data = await res.json();
   const info: Info[] = data.info;
