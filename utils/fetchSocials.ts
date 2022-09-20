@@ -1,10 +1,7 @@
 import { Social } from "../typings";
 
 export const fetchSocials = async () => {
-  const baseURL = process.env.NEXT_PUBLIC_VERCEL_URL;
-  const Url = "/api/getSocials";
-
-  const res = await fetch(new URL(Url, baseURL));
+  const res = await fetch('https://debately-soon-5wljr35tr-dariefmaes.vercel.app');
 
   const data = await res.json();
   const socials: Social[] = data.socials;
