@@ -31,21 +31,8 @@ const Home = ({ info, socials }: props) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const dev = process.env.NODE_ENV !== "production";
-
-  const server = dev
-    ? "http://localhost:3000"
-    : process.env.NEXT_PUBLIC_VERCEL_URL;
-
-  const resInfo = await fetch(`${server}/api/getInfo`);
-  const dataInfo = await resInfo.json();
-
-  const info: Info[] = dataInfo.info;
-
-  const resSocials = await fetch(`${server}/api/getSocials`);
-
-  const dataSocials = await resSocials.json();
-  const socials: Social[] = dataSocials.socials;
+  const info: Info[] = await fetchInfo();
+  const socials: Social[] = await fetchSocials();
 
   return {
     props: {
