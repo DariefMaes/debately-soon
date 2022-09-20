@@ -13,11 +13,6 @@ export const Notify = ({
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string>("");
 
-  useEffect(() => {
-    console.log(status);
-    console.log(message);
-  }, [status, message]);
-
   const handleFormSubmit = () => {
     setError("");
 
