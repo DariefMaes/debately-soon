@@ -9,7 +9,7 @@ export const fetchSocials = async () => {
 
   const res = await fetch(`https://${server}/api/getSocials`);
   
-  console.log(res)
+  console.log('test',res)
 
   const data = await res.json();
   const socials: Social[] = data.socials;
