@@ -10,6 +10,9 @@ export const fetchInfo = async () => {
     : process.env.NEXT_PUBLIC_VERCEL_URL;
 
   const res = await fetch(`https://${server}/api/getInfo`);
+  
+   
+  console.log('test',res)
 
   const data = await res.json();
   const info: Info[] = data.info;
