@@ -7,10 +7,10 @@ export const fetchSocials = async () => {
     ? "http://localhost:3000"
     : process.env.NEXT_PUBLIC_VERCEL_URL;
 
-  const res = await fetch(`https://${server}/api/getSocials`);
+  // const res = await fetch(`${server}/api/getSocials`);
 
-  const data = await res.json();
-  const socials: Social[] = data.socials;
+  // const data = await res.json();
+  // const socials: Social[] = data.socials;
 
-  return socials;
+  // return socials;
 };
