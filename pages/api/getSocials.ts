@@ -13,7 +13,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<data>
 ) {
-  const socials: Social[] = await sanityClient.fetch(query);
-
-  res.status(200).json({ socials });
+  // const socials: Social[] = await sanityClient.fetch(query);
+  // res.status(200).json({ socials });
 }

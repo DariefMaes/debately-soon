@@ -26,7 +26,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           href="/images/favicon-16x16.png"
         />
       </Head>
-      ;
       <Component {...pageProps} />;
     </>
   );

@@ -1,51 +1,47 @@
-import type { GetStaticProps, NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
+import type { GetStaticProps } from "next";
 import { Content } from "../components/content";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
 import { MailchimpNotify } from "../components/mailChimpNotify";
-import { Notify } from "../components/notify";
-import styles from "../styles/Home.module.css";
 import { Info, Social } from "../typings";
-import { fetchInfo } from "../utils/fetchInfo";
-import { fetchSocials } from "../utils/fetchSocials";
+import { createClient, groq } from "next-sanity";
 
 interface props {
   info: Info[];
   socials: Social[];
 }
 
+const client = createClient({
+  projectId: "ua4ea78d",
+  dataset: "production",
+  apiVersion: "2022-03-25",
+  useCdn: false,
+});
+
 const Home = ({ info, socials }: props) => {
   return (
     <div className="p-0 m-0 font-montserrat">
-      <Header info={info[0]} />
+      {info && socials ? (
+        <>
+          <Header info={info[0]} />
 
-      <Content info={info[0]} />
+          <Content info={info[0]} />
 
-      <MailchimpNotify />
+          <MailchimpNotify />
 
-      <Footer socials={socials} />
+          <Footer socials={socials} />
+        </>
+      ) : null}
     </div>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const dev = process.env.NODE_ENV !== "production";
+  const socialsQuery = groq`*[_type == "socials"]`;
+  const infoQuery = groq`*[_type == "info"]`;
 
-  const server = dev
-    ? "http://localhost:3000"
-    : process.env.NEXT_PUBLIC_VERCEL_URL;
-
-  const resInfo = await fetch(`${server}/api/getInfo`);
-  const dataInfo = await resInfo.json();
-
-  const info: Info[] = dataInfo.info;
-
-  const resSocials = await fetch(`${server}/api/getSocials`);
-
-  const dataSocials = await resSocials.json();
-  const socials: Social[] = dataSocials.socials;
+  const info: Info[] = await client.fetch(infoQuery);
+  const socials: Social[] = await client.fetch(socialsQuery);
 
   return {
     props: {

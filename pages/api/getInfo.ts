@@ -13,7 +13,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<data>
 ) {
-  const info: Info[] = await sanityClient.fetch(query);
-
-  res.status(200).json({ info });
+  // const info: Info[] = await sanityClient.fetch(query);
+  // res.status(200).json({ info });
 }
